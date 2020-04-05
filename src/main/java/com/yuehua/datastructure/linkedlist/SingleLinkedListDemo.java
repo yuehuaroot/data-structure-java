@@ -37,25 +37,29 @@ public class SingleLinkedListDemo {
 //        singleLinkedList.addByOrder(heroNode3);
 //        singleLinkedList.listNode();
 
-        // 测试修改节点
-        singleLinkedList.listNode();
-        singleLinkedList.updateHeroNode(new HeroNode(3, "有用", "大猩猩", null));
-        System.out.println("修改后");
-        singleLinkedList.listNode();
+//        // 测试修改节点
+//        singleLinkedList.listNode();
+//        singleLinkedList.updateHeroNode(new HeroNode(3, "有用", "大猩猩", null));
+//        System.out.println("修改后");
+//        singleLinkedList.listNode();
+//
+//
+//        System.out.print("删除前");
+//        singleLinkedList.listNode();
+//        singleLinkedList.deleteHero(3);
+//        singleLinkedList.deleteHero(1);
+////        singleLinkedList.deleteHero(4);
+////        singleLinkedList.deleteHero(2);
+////        singleLinkedList.deleteHero(2);
+//        System.out.println("删除后");
+//        singleLinkedList.listNode();
 
 
-        System.out.print("删除前");
+//        System.out.println(singleLinkedList.length(singleLinkedList.getHead()));
+        // 测试获取单链表的倒数第k个节点
         singleLinkedList.listNode();
-        singleLinkedList.deleteHero(3);
-        singleLinkedList.deleteHero(1);
-//        singleLinkedList.deleteHero(4);
-//        singleLinkedList.deleteHero(2);
-//        singleLinkedList.deleteHero(2);
-        System.out.println("删除后");
-        singleLinkedList.listNode();
-
-
-        System.out.println(singleLinkedList.length(singleLinkedList.getHead()));
+        HeroNode lastIndexNode = singleLinkedList.getLastIndexNode(singleLinkedList.getHead(), 5);
+        System.out.println("结果："+lastIndexNode);
 
 
     }
@@ -225,6 +229,32 @@ class SingleLinkedList {
         }
         return length;
 
+    }
+
+    /**
+     * 获取单链表倒数第K个节点
+     * 思路：
+     * 1.获取单链表的长度
+     * 2.循环单链表找到第k个节点
+     *
+     * @param head
+     * @param index
+     * @return
+     */
+    public HeroNode getLastIndexNode(HeroNode head, Integer index) {
+        HeroNode result = null;
+        Integer length = length(head);
+        HeroNode current = head.next;
+        if (index < 0 || index > length) {
+            System.out.printf("index%d无效", index);
+            return result;
+        }
+
+        for (int i = 0; i < length - index; i++) {
+            current = current.next;
+        }
+
+        return current;
     }
 
 
