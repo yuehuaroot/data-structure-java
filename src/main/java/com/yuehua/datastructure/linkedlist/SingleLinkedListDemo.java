@@ -29,8 +29,11 @@ public class SingleLinkedListDemo {
         SingleLinkedList singleLinkedList = new SingleLinkedList();
         singleLinkedList.addByOrder(heroNode1);
         singleLinkedList.addByOrder(heroNode2);
-        singleLinkedList.addByOrder(heroNode3);
         singleLinkedList.addByOrder(heroNode4);
+        singleLinkedList.addByOrder(heroNode3);
+        singleLinkedList.addByOrder(heroNode3);
+//        singleLinkedList.addByOrder(heroNode4);
+
 //        singleLinkedList.addByOrder(heroNode3);
         singleLinkedList.listNode();
 
@@ -115,11 +118,11 @@ class SingleLinkedList {
             }
             // 已经加入成功活着 存在了 也要退出
             if (temp.no == hero.no) {
+                flag = true;
                 break;
             }
             // 找到了
             if (temp.next.no > hero.no) {
-                flag = true;
                 break;
             }
             temp = temp.next;
@@ -127,7 +130,7 @@ class SingleLinkedList {
         }
         if (flag) {
             System.out.println("英雄=>" + hero.toString() + "已经存在，不能加入");
-        }{
+        } else {
 
             hero.next = temp.next;
             temp.next = hero;
