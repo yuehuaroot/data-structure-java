@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
  * 单向链表
  */
 public class SingleLinkedListDemo {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         // 测试
         // 创建节点  没有考虑排名
 //        HeroNode heroNode = new HeroNode(1, "宋江", "及时雨", null);
@@ -31,11 +31,18 @@ public class SingleLinkedListDemo {
         singleLinkedList.addByOrder(heroNode2);
         singleLinkedList.addByOrder(heroNode4);
         singleLinkedList.addByOrder(heroNode3);
-        singleLinkedList.addByOrder(heroNode3);
+//        singleLinkedList.addByOrder(heroNode3);
 //        singleLinkedList.addByOrder(heroNode4);
 
 //        singleLinkedList.addByOrder(heroNode3);
+//        singleLinkedList.listNode();
+
+        // 测试修改节点
         singleLinkedList.listNode();
+        singleLinkedList.updateHeroNode(new HeroNode(3,"有用","大猩猩",null));
+        System.out.println("修改后");
+        singleLinkedList.listNode();
+
 
 
     }
@@ -47,7 +54,7 @@ public class SingleLinkedListDemo {
 @NoArgsConstructor
 class HeroNode {
     // 编号
-    public int no;
+    public Integer no;
     public String name;
     public String nickName;
 
@@ -107,7 +114,10 @@ class SingleLinkedList {
      * 1.加入到哪里
      * 2.怎么加入
      */
-    public void addByOrder(HeroNode hero) {
+    public void addByOrder(HeroNode hero) throws Exception {
+        if (hero == null || hero.no == null) {
+            throw new Exception(hero.toString() + "为空");
+        }
         HeroNode temp = head;
         // 退出循环的标志
         boolean flag = false;
@@ -135,6 +145,34 @@ class SingleLinkedList {
             hero.next = temp.next;
             temp.next = hero;
         }
+    }
+
+
+    public void updateHeroNode(HeroNode newHeroNode) throws Exception {
+        if (newHeroNode == null || newHeroNode.no == null) {
+            throw new Exception("英雄节点为空");
+        }
+        HeroNode temp = head;
+        // 是否找到要修改的节点
+        boolean flag = false;
+        while (true) {
+            if (temp.next == null) {
+                break;
+            }
+            if (temp.next.no == newHeroNode.no) {
+                flag = true;
+                break;
+            }
+            temp = temp.next;
+        }
+        if (flag) {
+            temp.name = newHeroNode.name;
+            temp.nickName = newHeroNode.nickName;
+        } else {
+            System.out.println("没找到节点" + newHeroNode.toString());
+        }
+
+
     }
 
 
