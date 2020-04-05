@@ -31,6 +31,12 @@ public class SingleLinkedListDemo {
         singleLinkedList.addByOrder(heroNode2);
         singleLinkedList.addByOrder(heroNode4);
         singleLinkedList.addByOrder(heroNode3);
+        // 测试反转
+        System.out.println("反转前");
+        singleLinkedList.listNode();
+        singleLinkedList.reverse(singleLinkedList.getHead());
+        System.out.println("反转后");
+        singleLinkedList.listNode();
 //        singleLinkedList.addByOrder(heroNode3);
 //        singleLinkedList.addByOrder(heroNode4);
 
@@ -57,9 +63,9 @@ public class SingleLinkedListDemo {
 
 //        System.out.println(singleLinkedList.length(singleLinkedList.getHead()));
         // 测试获取单链表的倒数第k个节点
-        singleLinkedList.listNode();
-        HeroNode lastIndexNode = singleLinkedList.getLastIndexNode(singleLinkedList.getHead(), 5);
-        System.out.println("结果："+lastIndexNode);
+//        singleLinkedList.listNode();
+//        HeroNode lastIndexNode = singleLinkedList.getLastIndexNode(singleLinkedList.getHead(), 5);
+//        System.out.println("结果：" + lastIndexNode);
 
 
     }
@@ -255,6 +261,41 @@ class SingleLinkedList {
         }
 
         return current;
+    }
+
+
+    /**
+     * 反转单向链表
+     * 思路：
+     * 1.遍历原链表
+     * 2.每遍历一个节点，将该节点放入新链表的最前端
+     * 3.去掉新链表的头部，用原链表的代替
+     *
+     * @param head
+     */
+    public static void reverse(HeroNode head) {
+        if (head.next == null || head.next.next == null) {
+            return;
+        }
+        HeroNode currentNode = head.next;
+        HeroNode next;
+        HeroNode newHead = new HeroNode(0, null, null, null);
+        while (currentNode != null) {
+            // 保存当前节点的洗个节点
+            next = currentNode.next;
+
+            currentNode.next = newHead.next;
+            newHead.next = currentNode;
+
+            // 下移
+            currentNode = next;
+
+
+        }
+
+        head.next = newHead.next;
+
+
     }
 
 
