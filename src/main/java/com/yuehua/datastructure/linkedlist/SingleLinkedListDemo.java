@@ -39,8 +39,19 @@ public class SingleLinkedListDemo {
 
         // 测试修改节点
         singleLinkedList.listNode();
-        singleLinkedList.updateHeroNode(new HeroNode(3,"有用","大猩猩",null));
+        singleLinkedList.updateHeroNode(new HeroNode(3, "有用", "大猩猩", null));
         System.out.println("修改后");
+        singleLinkedList.listNode();
+
+
+        System.out.print("删除前");
+        singleLinkedList.listNode();
+        singleLinkedList.deleteHero(3);
+        singleLinkedList.deleteHero(1);
+        singleLinkedList.deleteHero(4);
+        singleLinkedList.deleteHero(2);
+        singleLinkedList.deleteHero(2);
+        System.out.println("删除后");
         singleLinkedList.listNode();
 
 
@@ -173,6 +184,26 @@ class SingleLinkedList {
         }
 
 
+    }
+
+    public void deleteHero(Integer no) {
+        HeroNode temp = head;
+        boolean falg = false;
+        while (true) {
+            if (temp.next == null) {
+                break;
+            }
+            if (temp.next.no == no) {
+                falg = true;
+                break;
+            }
+            temp = temp.next;
+        }
+        if (falg) {
+            temp.next = temp.next.next;
+        } else {
+            System.out.printf("没有找到%d要删除的节点", no);
+        }
     }
 
 
