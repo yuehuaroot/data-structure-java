@@ -48,12 +48,14 @@ public class SingleLinkedListDemo {
         singleLinkedList.listNode();
         singleLinkedList.deleteHero(3);
         singleLinkedList.deleteHero(1);
-        singleLinkedList.deleteHero(4);
-        singleLinkedList.deleteHero(2);
-        singleLinkedList.deleteHero(2);
+//        singleLinkedList.deleteHero(4);
+//        singleLinkedList.deleteHero(2);
+//        singleLinkedList.deleteHero(2);
         System.out.println("删除后");
         singleLinkedList.listNode();
 
+
+        System.out.println(singleLinkedList.length(singleLinkedList.getHead()));
 
 
     }
@@ -159,6 +161,10 @@ class SingleLinkedList {
     }
 
 
+    public HeroNode getHead() {
+        return head;
+    }
+
     public void updateHeroNode(HeroNode newHeroNode) throws Exception {
         if (newHeroNode == null || newHeroNode.no == null) {
             throw new Exception("英雄节点为空");
@@ -204,6 +210,21 @@ class SingleLinkedList {
         } else {
             System.out.printf("没有找到%d要删除的节点", no);
         }
+    }
+
+    // 面试题目： 单链表有效节点的个数
+    public Integer length(HeroNode head) {
+        Integer length = 0;
+        if (head.next == null) {
+            return length;
+        }
+        HeroNode currentNode = head.next;
+        while (currentNode != null) {
+            length++;
+            currentNode = currentNode.next;
+        }
+        return length;
+
     }
 
 
